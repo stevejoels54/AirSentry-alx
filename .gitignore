@@ -21,7 +21,7 @@
 # virtualenv
 .venv
 venv
-env
+.env
 
 # vscode
 .vscode
