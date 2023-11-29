@@ -80,22 +80,16 @@ The AirSentry API provides endpoints to manage devices, readings, and notificati
 
 If you'd like to contribute to this project, please follow these guidelines:
 
-- Fork the repository.
-- Create a new branch for your feature: ```bash
-  git checkout -b feature-name.
-
-````
-- Commit your changes: ```bash
-git commit -m 'Add a new feature'.
-````
-
-- Push to the branch: ```bash
-  git push origin feature-name.
-
-```
-- Submit a pull request.
+1.  Fork the repository.
+2.  Create a new branch for your feature: `git checkout -b feature-name`.
+3.  Commit your changes: `git commit -m 'Add a new feature'`.
+4.  Push to the branch: `git push origin feature-name`.
+5.  Submit a pull request.
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+```
+
 ```
