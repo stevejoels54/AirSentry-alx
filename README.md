@@ -34,11 +34,11 @@ This project features an Indoor Air Quality Monitoring system, including an embe
    pip install -r requirements.txt
    ```
 
-4. Create a `.ini` file in the root directory with the following content (same content in sample_ini):
+4. Create a `.env` file in the root directory with the following content (sample content in sample_env):
 
-   ```ini
-   [PROD]
-   DB_URI = mongodb+srv://<username>:<password>@<your-atlas-cluster-address>/database
+   ```dotenv
+   # .env
+   DB_URI=mongodb+srv://<username>:<password>@<your-atlas-cluster-address>/database
    ```
 
    Replace `<username>`, `<password>`, and `<your-atlas-cluster-address>` with your MongoDB Atlas credentials.
