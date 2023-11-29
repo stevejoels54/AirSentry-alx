@@ -53,19 +53,31 @@ python app.py
 
 The app will be accessible at http://127.0.0.1:5000/airsentry/api/v1/.
 
-API Endpoints
-GET /airsentry/api/v1/: Returns information about the Indoor Air Quality Monitoring API and project.
-GET /airsentry/api/v1/devices: Returns a list of devices.
-POST /airsentry/api/v1/devices: Creates a new device.
-GET /airsentry/api/v1/devices/<device_id>: Returns information about a specific device.
-PUT /airsentry/api/v1/devices/<device_id>: Updates information about a specific device.
-DELETE /airsentry/api/v1/devices/<device_id>: Deletes a specific device.
-GET /airsentry/api/v1/readings: Returns a list of readings.
-POST /airsentry/api/v1/readings: Creates a new reading.
-GET /airsentry/api/v1/notifications: Returns a list of notifications.
-POST /airsentry/api/v1/notifications: Creates a new notification.
+## API Endpoints
 
-##Contributing
+The AirSentry API provides endpoints to manage devices, readings, and notifications.
+
+### Device Endpoints
+
+- GET /airsentry/api/v1/devices: Returns a list of devices.
+- POST /airsentry/api/v1/devices: Creates a new device.
+- GET /airsentry/api/v1/devices/<device_id>: Returns information about a specific device.
+- PUT /airsentry/api/v1/devices/<device_id>: Updates information about a specific device.
+- DELETE /airsentry/api/v1/devices/<device_id>: Deletes a specific device.
+
+### Reading Endpoints
+
+- GET /airsentry/api/v1/readings: Returns a list of readings.
+- GET /airsentry/api/v1/readings/<device_id>: Returns most recent reading from the device
+- POST /airsentry/api/v1/readings: Creates a new reading.
+
+### Notification Endpoints
+
+- GET /airsentry/api/v1/notifications: Returns a list of notifications.
+- POST /airsentry/api/v1/notifications: Creates a new notification.
+
+## Contributing
+
 If you'd like to contribute to this project, please follow these guidelines:
 
 Fork the repository.
@@ -74,5 +86,6 @@ Commit your changes: git commit -m 'Add a new feature'.
 Push to the branch: git push origin feature-name.
 Submit a pull request.
 
-##License
+## License
+
 This project is licensed under the MIT License - see the LICENSE file for details.
