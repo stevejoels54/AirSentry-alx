@@ -3,16 +3,15 @@ from pymongo import MongoClient
 from bson.objectid import ObjectId
 from bson.json_util import dumps
 from datetime import datetime
+from dotenv import load_dotenv
 import os
-import configparser
 
+load_dotenv()
 app = Flask(__name__)
 
-config = configparser.ConfigParser()
-config.read(os.path.abspath(os.path.join(".ini")))
 
-# Replace the following connection string with your MongoDB Atlas connection string imported from the .ini file
-mongo_uri = config['PROD']['DB_URI']
+# Replace the following connection string with your MongoDB Atlas connection string imported from the .env file
+mongo_uri = os.environ.get('DB_URI')
 client = MongoClient(mongo_uri)
 
 # 'test_db' name of your database
