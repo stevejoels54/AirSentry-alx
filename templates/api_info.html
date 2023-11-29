@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AirSentry API</title>
+  </head>
+  <body>
+    <h1>Welcome to the AirSentry API</h1>
+    <p>
+      This API is part of the Indoor Air Quality Monitoring project, featuring
+      an embedded device, a RESTful API backend, and a React.js web app.
+    </p>
+
+    <h2>API Endpoints</h2>
+    <ul>
+      <li>
+        <a href="{{ url_for('manage_devices') }}">Get Cluster Count</a> -
+        Returns the number of clusters.
+      </li>
+      <li>
+        <a href="{{ url_for('manage_devices') }}">Get Devices Data</a> - Returns
+        data from the 'devices' cluster.
+      </li>
+    </ul>
+  </body>
+</html>

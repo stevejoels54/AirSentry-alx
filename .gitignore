@@ -1,0 +1,27 @@
+# init file
+.init
+.ini
+
+# log files
+*.log
+
+# package files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# text files
+*.doc*
+
+# virtualenv
+.venv
+venv
+env
+
+# vscode
+.vscode
