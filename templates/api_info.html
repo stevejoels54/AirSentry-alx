@@ -14,13 +14,70 @@
 
     <h2>API Endpoints</h2>
     <ul>
+      <!-- Device Endpoints -->
       <li>
-        <a href="{{ url_for('manage_devices') }}">Get Cluster Count</a> -
-        Returns the number of clusters.
+        <a href="{{ url_for('manage_devices') }}"
+          >GET /airsentry/api/v1/devices</a
+        >
+        - Returns a list of devices.
       </li>
       <li>
-        <a href="{{ url_for('manage_devices') }}">Get Devices Data</a> - Returns
-        data from the 'devices' cluster.
+        <a href="{{ url_for('manage_devices') }}"
+          >POST /airsentry/api/v1/devices</a
+        >
+        - Creates a new device.
+      </li>
+      <li>
+        <a href="{{ url_for('manage_device', device_id='<device_id>') }}"
+          >GET /airsentry/api/v1/devices/&lt;device_id&gt;</a
+        >
+        - Returns information about a specific device.
+      </li>
+      <li>
+        <a href="{{ url_for('manage_device', device_id='<device_id>') }}"
+          >PUT /airsentry/api/v1/devices/&lt;device_id&gt;</a
+        >
+        - Updates information about a specific device.
+      </li>
+      <li>
+        <a href="{{ url_for('manage_device', device_id='<device_id>') }}"
+          >DELETE /airsentry/api/v1/devices/&lt;device_id&gt;</a
+        >
+        - Deletes a specific device.
+      </li>
+
+      <!-- Reading Endpoints -->
+      <li>
+        <a href="{{ url_for('manage_readings') }}"
+          >GET /airsentry/api/v1/readings</a
+        >
+        - Returns a list of readings.
+      </li>
+      <li>
+        <a href="{{ url_for('manage_readings') }}"
+          >POST /airsentry/api/v1/readings</a
+        >
+        - Creates a new reading.
+      </li>
+      <li>
+        <a href="{{ url_for('get_latest_reading', device_id='<device_id>') }}"
+          >GET /airsentry/api/v1/readings/&lt;device_id&gt;</a
+        >
+        - Returns most recent reading from the device.
+      </li>
+
+      <!-- Notification Endpoints -->
+      <li>
+        <a href="{{ url_for('manage_notifications') }}"
+          >GET /airsentry/api/v1/notifications</a
+        >
+        - Returns a list of notifications.
+      </li>
+      <li>
+        <a href="{{ url_for('manage_notifications') }}"
+          >POST /airsentry/api/v1/notifications</a
+        >
+        - Creates a new notification.
       </li>
     </ul>
   </body>
