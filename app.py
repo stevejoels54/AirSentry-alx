@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request, render_template
+from flask_cors import CORS
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from bson.json_util import dumps
@@ -8,6 +9,7 @@ import os
 
 load_dotenv()
 app = Flask(__name__)
+CORS(app)
 
 
 # Replace the following connection string with your MongoDB Atlas connection string imported from the .env file
