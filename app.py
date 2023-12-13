@@ -6,10 +6,18 @@ from bson.json_util import dumps
 from datetime import datetime
 from dotenv import load_dotenv
 import os
+import pytz
 
 load_dotenv()
 app = Flask(__name__)
 CORS(app)
+
+# Set the timezone to East Africa Time
+my_timezone = pytz.timezone('Africa/Nairobi')
+
+# Set the timezone for the app
+
+app.config['TIMEZONE'] = my_timezone
 
 
 # Replace the following connection string with your MongoDB Atlas connection string imported from the .env file
@@ -69,6 +77,44 @@ def manage_readings():
             reading_data['timestamp'] = datetime.strptime(reading_data['timestamp'], "%Y-%m-%d %H:%M:%S")
 
         reading_id = readings_collection.insert_one(reading_data).inserted_id
+
+        # check if the reading is above the threshold and create a notification if it is 
+        if reading_data['air'] > 100:
+            notification_data = {
+                "condition": "air",
+                "device_id": reading_data['device_id'],
+                "timestamp": reading_data['timestamp'],
+                "message": "Air quality is above threshold"
+            }
+            notifications_collection.insert_one(notification_data)
+
+        if reading_data['temperature'] > 30:
+            notification_data = {
+                "condition": "temperature",
+                "device_id": reading_data['device_id'],
+                "timestamp": reading_data['timestamp'],
+                "message": "Temperature is above threshold"
+            }
+            notifications_collection.insert_one(notification_data)
+
+        if reading_data['humidity'] > 70:
+            notification_data = {
+                "condition": "humidity",
+                "device_id": reading_data['device_id'],
+                "timestamp": reading_data['timestamp'],
+                "message": "Humidity is above threshold"
+            }
+            notifications_collection.insert_one(notification_data)
+
+        if reading_data['co'] > 100:
+            notification_data = {
+                "condition": "co",
+                "device_id": reading_data['device_id'],
+                "timestamp": reading_data['timestamp'],
+                "message": "CO is above threshold"
+            }
+            notifications_collection.insert_one(notification_data)
+
         return jsonify({"reading_id": str(reading_id)})
     
 # function to get the most recent reading for a device
@@ -88,6 +134,48 @@ def manage_notifications():
         notification_data = request.json
         notification_id = notifications_collection.insert_one(notification_data).inserted_id
         return jsonify({"notification_id": str(notification_id)})
+    
+# function to get the most recent notification for a device, by looking up the most recent reading and getting the notification with the same timestamp
+@app.route(f'{api_base_url}/notifications/<device_id>', methods=['GET'])
+def get_notifications_today(device_id):
+    if request.method == 'GET':
+        # Get the current date and time
+        current_datetime = datetime.now()
+
+        # Calculate the start of the present day
+        start_of_day = current_datetime.replace(hour=0, minute=0, second=0, microsecond=0)
+
+        # Query notifications for the specified device within the present day
+        notifications = notifications_collection.find({
+            "device_id": device_id,
+            "timestamp": {"$gte": start_of_day}
+        })
+
+        # Convert the cursor to a list and return as JSON
+        return dumps(list(notifications))
+
+    
+# Get daily average of air quality, temperature and humidity for the last 7 days and return them as arrays of days and values
+@app.route(f'{api_base_url}/readings/averages/<device_id>', methods=['GET'])
+def get_daily_averages(device_id):
+    if request.method == 'GET':
+        readings = list(readings_collection.find({"device_id": device_id}, sort=[("timestamp", -1)]))
+        
+        # Get the last 7 days of readings
+        readings = readings[:7]
+
+        # Get the average of each reading type for each day
+        averages = []
+        for reading in readings:
+            averages.append({
+                "day": reading['timestamp'].strftime("%Y-%m-%d"),
+                "air": round(reading.get('air', 0), 2),
+                "temperature": round(reading.get('temperature', 0), 2),
+                "humidity": round(reading.get('humidity', 0), 2),
+                "co": round(reading.get('co', 0), 2),
+            })
+
+        return dumps(averages)
 
 if __name__ == '__main__':
     app.run(debug=True)
