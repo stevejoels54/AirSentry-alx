@@ -3,3 +3,4 @@ pymongo[srv]
 Flask-PyMongo
 Flask-Cors
 python-dotenv
+pytz
